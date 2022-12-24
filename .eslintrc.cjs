@@ -16,5 +16,6 @@ module.exports = {
   },
   rules: {
     // 這邊可以自訂規則
+    'vue/multi-word-component-names': 0
   }
 }
