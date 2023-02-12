@@ -1,7 +1,7 @@
 <template>
-  <div class="flex align-middle items-center min-h-screen">
+  <div class="flex align-middle items-center min-h-screen ">
     <main
-      class="flex mx-auto w-[870px] border-black border-2 border-solid px-[48px] py-[96px]"
+      class="flex mx-auto w-[870px] border-black border-2 border-solid shadow-4xl px-[48px] py-[96px]"
     >
       <div class="w-1/2">
         <img :src="loginImage" />

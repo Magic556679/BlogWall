@@ -1,27 +1,23 @@
 import { createRouter, createWebHashHistory } from 'vue-router';
-import FrontDesk from '../views/fronted/FrontDesk.vue'
-import Home from '../views/fronted/Home.vue'
-import LoginHome from '../views/fronted/login/Index.vue'
-import Login from '../views/fronted/login/Login.vue'
 
 const routes = [
   {
     path: '/',
-    component: FrontDesk,
+    component: () => import('../views/fronted/FrontDesk.vue'),
     children: [
       {
         path: '',
-        component: Home,
+        component: () => import('../views/fronted/Home.vue'),
       },
     ],
   },
   {
     path: '/login',
-    component: LoginHome,
+    component: () => import('../views/fronted/login/Index.vue'),
     children: [
       {
         path: '',
-        component: Login,
+        component: () => import('../views/fronted/login/Login.vue'),
       },
     ],
   },
