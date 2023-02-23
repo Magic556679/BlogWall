@@ -17,7 +17,13 @@ const routes = [
     children: [
       {
         path: '',
+        name: 'login',
         component: () => import('../views/fronted/login/Login.vue'),
+      },
+      {
+        path: 'register',
+        name: 'register',
+        component: () => import('../views/fronted/login/Register.vue'),
       },
     ],
   },

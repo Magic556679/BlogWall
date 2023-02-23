@@ -1,5 +1,4 @@
 <template>
-  <h1 class="text-4xl font-bold text-center">Welcome BlogWall</h1>
   <VeeForm fef="form" v-slot="{ errors }" @submit="login">
     <Field
       v-model="formData.mail"
@@ -23,13 +22,18 @@
       登入
     </button>
   </VeeForm>
-  <p class="mt-4 text-base text-center">註冊帳號</p>
+  <p class="mt-4 text-base text-center">  <router-link
+      :to="{
+        name: 'register',
+      }"
+      >註冊帳號</router-link
+    ></p>
+
 </template>
 <script setup lang="ts">
 import { ref } from 'vue';
 
 const formData = ref({ mail: '' });
-console.log(formData.value.mail);
 function login() {
   console.log('submit');
 }
