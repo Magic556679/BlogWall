@@ -1,6 +1,6 @@
 <template>
   <!-- @submit="login" -->
-  <VeeForm fef="form" v-slot="{ errors }">
+  <VeeForm v-slot="{ errors }">
     <Field
       v-model="formData.email"
       name="email"
@@ -56,10 +56,9 @@ const errorMessage = ref('');
 
 const login = async () => {
   try {
-    const { data } = await loginApi(formData.value);
+    await loginApi(formData.value);
     errorMessage.value = ''
-    console.log(data);
-  } catch (error: unknown ) {
+  } catch (error) {
     if (error instanceof AxiosError) {
       errorMessage.value = error.response?.data?.message;
     }
