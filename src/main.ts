@@ -6,6 +6,8 @@ import { localize, setLocale } from '@vee-validate/i18n';
 import './style.css'
 import App from './App.vue'
 import router from './router'
+import '@fortawesome/fontawesome-free/css/all.css'
+import '@fortawesome/fontawesome-free/js/all.js'
 
 Object.keys(AllRules).forEach(rule => {
   defineRule(rule, AllRules[rule]);
