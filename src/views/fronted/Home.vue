@@ -1,5 +1,5 @@
 <template>
-  <main class="sm:w-[860px] flex justify-between mx-auto mt-12">
+  <div class="flex justify-between mt-12">
     <div class="sm:w-[65%]">
       <div class="flex justify-between">
         <select
@@ -36,27 +36,12 @@
         <StoryWallContent :data="postsData"></StoryWallContent>
       </main>
     </div>
-    <div class="sm:w-[30%] px-5 py-8 border-2 rounded-lg border-black">
-      <button
-        type="button"
-        class="w-full py-4 border-2 border-solid border-black rounded-lg text-white bg-[#03438D] shadow-3xl"
-      >
-        張貼動態
-      </button>
-      <div class="flex mt-6">
-        <img
-          class="w-[45px] h-[45px] mr-4 border-2 border-black rounded-full inline-block"
-          :src="profilePictureDefault"
-          alt=""
-        />
-        <p>tony</p>
-      </div>
-    </div>
-  </main>
+    <Aside></Aside>
+  </div>
 </template>
 <script setup lang="ts">
-import profilePictureDefault from '@/assets/images/userDefault.jpg';
 import StoryWallContent from '@/components/business/StoryWall.vue';
+import Aside from '@/components/layout/Aside.vue'
 import { fetchAllPosts } from '@/services/api/post';
 import { ref } from 'vue';
 
