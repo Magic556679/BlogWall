@@ -9,6 +9,10 @@ const routes = [
         path: '',
         component: () => import('../views/fronted/Home.vue'),
       },
+      {
+        path: 'posts',
+        component: () => import('@/views/fronted/posts/CreatePosts.vue'),
+      },
     ],
   },
   {
