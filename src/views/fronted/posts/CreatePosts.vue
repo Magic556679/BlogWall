@@ -15,8 +15,16 @@
         >
         </textarea>
       </div>
-      <div>
-        <Button size="w-[128px]"></Button>
+      <Button class="my-4" size="w-[128px]" bg-color="bg-black">
+        上傳圖片
+      </Button>
+      <div
+        class="w-full h-[157px] rounded-lg border-2 border-solid border-black"
+      ></div>
+      <div class="text-center">
+        <Button class="my-4" size="w-80">
+          送出貼文
+        </Button>
       </div>
     </section>
     <Aside></Aside>
@@ -24,8 +32,7 @@
 </template>
 <script setup lang="ts">
 import Aside from '@/components/layout/Aside.vue';
-import Button from '@/components/common/button.vue'
+import Button from '@/components/common/Button.vue';
 import { ref } from 'vue';
 const comment = ref('hello');
-
 </script>
