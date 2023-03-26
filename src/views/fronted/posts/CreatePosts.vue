@@ -22,7 +22,7 @@
         class="w-full h-[157px] rounded-lg border-2 border-solid border-black"
       ></div>
       <div class="text-center">
-        <Button class="my-4" size="w-80">
+        <Button class="my-4" size="w-80" @click="test">
           送出貼文
         </Button>
       </div>
@@ -35,4 +35,7 @@ import Aside from '@/components/layout/Aside.vue';
 import Button from '@/components/common/Button.vue';
 import { ref } from 'vue';
 const comment = ref('hello');
+const test = () => {
+  console.log('click')
+}
 </script>
