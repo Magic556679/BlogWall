@@ -57,6 +57,7 @@ const errorMessage = ref('');
 const login = async () => {
   try {
     await loginApi(formData.value);
+    console.log('git SSH test')
     errorMessage.value = ''
   } catch (error) {
     if (error instanceof AxiosError) {
