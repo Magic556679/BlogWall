@@ -56,16 +56,17 @@ const errorMessage = ref('');
 
 const login = async () => {
   try {
-    await loginApi(formData.value);
-    console.log('git SSH test')
-    errorMessage.value = ''
+    const { data: { data } } = await loginApi(formData.value);
+    errorMessage.value = '';
+    document.cookie = `id_token= ${data.token}`;
   } catch (error) {
     if (error instanceof AxiosError) {
       errorMessage.value = error.response?.data?.message;
     }
-    console.error(error)
+    console.error(error);
   }
 };
+
 // const rulesPassword = (value: string): string | boolean => {
 //   if (value) {
 //     return true;
