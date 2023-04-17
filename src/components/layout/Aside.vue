@@ -3,6 +3,7 @@
     <button
       type="button"
       class="w-full py-4 border-2 border-solid border-black rounded-lg text-white bg-[#03438D] shadow-3xl"
+      @click="$router.push({ path: 'posts' })"
     >
       張貼動態
     </button>
