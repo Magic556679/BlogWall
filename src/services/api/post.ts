@@ -6,3 +6,16 @@ export function fetchAllPosts() {
     method: 'get'
   });
 }
+
+interface CreatePostData {
+  image: string;
+  content: string;
+};
+
+export function createPosts(data: CreatePostData) {
+  return service({
+    url: 'posts',
+    method: 'post',
+    data
+  });
+}
