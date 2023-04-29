@@ -19,12 +19,14 @@
 </template>
 <script setup lang="ts">
 import profilePictureDefault from '@/assets/images/userDefault.jpg';
+import { ref } from 'vue';
+
 const props = defineProps({
   width: {
     type: String,
     default: 'sm:w-[30%]'
   }
-})
-
-
+});
+const profile = ref('');
+console.log(profile)
 </script>

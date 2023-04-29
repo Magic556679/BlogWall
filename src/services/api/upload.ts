@@ -1,10 +1,6 @@
 import service from '@/services/api/axios';
 
-interface formData {
-  file: File;
-}
-
-export function uploadImage(data: formData) {
+export function uploadImage(data: FormData) {
   return service({
     url: 'upload',
     method: 'post',

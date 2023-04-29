@@ -20,9 +20,9 @@
         <div>
           {{ item.content }}
         </div>
-        <img class="mt-4" :src="demo" alt="" />
+        <img class="mt-4" :src="item.image" alt="" />
         <i class="fa-regular fa-heart mt-5 mr-2"></i>
-        <span>4444個讚</span>
+        <span>{{ item.likes }}個讚</span>
       </section>
       <section class="flex mt-4 items-center">
         <img
@@ -71,11 +71,12 @@
 </template>
 <script setup lang="ts">
 import userDefault from '@/assets/images/userDefault.jpg';
-import demo from '@/assets/images/space.jpg';
 
 interface dataItem {
   _id: string;
   content: string;
+  image: string;
+  likes: number;
 }
 
 const props = defineProps({

@@ -38,9 +38,8 @@
       </div>
 
       <div
-        class="w-full h-[157px] rounded-lg border-2 border-solid border-black"
+        class="w-full h-[157px] rounded-lg border-2 border-solid border-black bg-cover bg-center" :style="{ backgroundImage: `url(${imageUrl})` }"
       >
-      <img :src="imageUrl">
       </div>
       <div class="text-center">
         <Button class="my-4" size="w-80" @click="submitData"> 送出貼文 </Button>
@@ -76,10 +75,9 @@ const upload = async (e: Event) => {
     if (!files) {
       return;
     }
-    const formData = new FormData();
-    formData.append('file', files);
-    const { data: { data } } = await uploadImage(formData);
-    console.log(data.url)
+    const imageFormData = new FormData();
+    imageFormData.append('file', files);
+    const { data: { data } } = await uploadImage(imageFormData);
     imageUrl.value = data.url
   } catch (error) {
     console.error(error);
