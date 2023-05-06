@@ -56,7 +56,6 @@ const login = async () => {
   } catch (error) {
     if (error instanceof AxiosError) {
       errorMessage.value = error.response?.data?.message;
-      // form.value.validate()
     }
     console.error(error);
   }

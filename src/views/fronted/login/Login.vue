@@ -48,17 +48,27 @@
 </template>
 <script setup lang="ts">
 import { ref } from 'vue';
+import { useRouter } from 'vue-router'
 import { login as loginApi } from '@/services/api/user';
 import { AxiosError } from 'axios';
+import { useMainStore } from '@/store/index';
 
 const formData = ref({ email: '', password: '' });
 const errorMessage = ref('');
+const storeUser = useMainStore();
+const router = useRouter();
 
 const login = async () => {
   try {
-    const { data: { data } } = await loginApi(formData.value);
+    const {
+      data: { data },
+    } = await loginApi(formData.value);
+    storeUser.userName = data.name;
+    storeUser.userId = data.id;
     errorMessage.value = '';
     document.cookie = `id_token= ${data.token}`;
+    
+    router.push({ path: 'posts' });
   } catch (error) {
     if (error instanceof AxiosError) {
       errorMessage.value = error.response?.data?.message;

@@ -3,7 +3,7 @@ import { createRouter, createWebHashHistory } from 'vue-router';
 const routes = [
   {
     path: '/',
-    component: () => import('@/views/fronted/FrontDesk.vue'),
+    component: () => import('@/views/fronted/Frontdesk.vue'),
     children: [
       {
         path: '',
@@ -12,6 +12,10 @@ const routes = [
       {
         path: 'posts',
         component: () => import('@/views/fronted/posts/CreatePosts.vue'),
+      },
+      {
+        path: 'user',
+        component: () => import('@/views/fronted/user/User.vue'),
       },
     ],
   },
