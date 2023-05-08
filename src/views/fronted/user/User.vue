@@ -22,17 +22,12 @@
           </keep-alive>
         </div>
       </div>
-
-      <div class="text-center">
-        <Button class="my-4" size="w-80"> 送出更新 </Button>
-      </div>
     </section>
     <Aside></Aside>
   </div>
 </template>
 <script setup lang="ts">
 import Aside from '@/components/layout/Aside.vue';
-import Button from '@/components/common/Button.vue';
 import EditName from '@/views/fronted/user/tabs/EditName.vue';
 import ResetPassWord from '@/views/fronted/user/tabs/ResetPassWord.vue';
 import { ref, computed } from 'vue';
