@@ -22,20 +22,20 @@
     <label>暱稱</label>
     <input
       v-model="form.name"
-      name="name"
       type="text"
       placeholder="Password"
-      class="w-full h-[50px] px-6 py-4 border-2 border-solid border-black"
+      class="w-full h-[50px] mt-1 px-6 py-4 border-2 border-solid border-black"
     />
   </section>
   <section class="mt-4">
+    <p>性別</p>
     <label>
-      男性
       <input type="radio" v-model="gender" value="male" />
+      男性
     </label>
-    <label>
-      女性
+    <label class="ml-6">
       <input type="radio" v-model="gender" value="female" />
+      女性
     </label>
   </section>
   <div class="text-center">
