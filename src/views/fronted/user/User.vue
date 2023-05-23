@@ -28,7 +28,7 @@
 </template>
 <script setup lang="ts">
 import Aside from '@/components/layout/Aside.vue';
-import EditName from '@/views/fronted/user/tabs/EditName.vue';
+import UpdateProfile from '@/views/fronted/user/tabs/UpdateProfile.vue';
 import ResetPassWord from '@/views/fronted/user/tabs/ResetPassWord.vue';
 import { ref, computed } from 'vue';
 
@@ -46,6 +46,6 @@ const tableStyle = (value: string) => {
   ];
 };
 const currentTabComponent = computed(() => {
-  return currentTab.value === 'editName' ? EditName : ResetPassWord;
+  return currentTab.value === 'editName' ? UpdateProfile : ResetPassWord;
 });
 </script>
