@@ -32,3 +32,17 @@ export function profile({id}: UserId) {
     params: { id },
   });
 }
+
+interface UpdateUserProfile {
+  gender: string,
+  name: string,
+  photo: string
+}
+
+export function updateProfile(data: UpdateUserProfile) {
+  return service({
+    url: 'users/profile',
+    method: 'patch',
+    data
+  });
+}
