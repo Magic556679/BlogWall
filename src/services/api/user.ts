@@ -46,3 +46,17 @@ export function updateProfile(data: UpdateUserProfile) {
     data
   });
 }
+
+interface updateUserPassword {
+  password: string,
+  confirmPassword: string
+};
+
+
+export function updatePassword(data: updateUserPassword) {
+  return service({
+    url: 'users/updatePassword',
+    method: 'patch',
+    data
+  });
+}
