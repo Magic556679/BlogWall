@@ -1,7 +1,8 @@
 <template>
   <section class="text-center">
+    <!-- :src="form.photo ? form.photo : profilePictureDefault" -->
     <img
-      :src="form.photo ? form.photo : profilePictureDefault"
+      :src="computedUserProfilePhoto"
       class="w-[107px] h-[107px] border-1 border-black rounded-full mx-auto"
       alt=""
     />
@@ -48,7 +49,7 @@
 <script setup lang="ts">
 import Button from '@/components/common/Button.vue';
 import profilePictureDefault from '@/assets/images/userDefault.jpg';
-import { ref } from 'vue';
+import { ref, computed } from 'vue';
 import { useMainStore } from '@/store/index';
 import { uploadImage } from '@/services/api/upload';
 import { updateProfile } from '@/services/api/user';
@@ -61,11 +62,18 @@ interface FormData {
 
 const form = ref<FormData>({ name: '', gender: '', photo: '' });
 const userStore = useMainStore();
-const userId = userStore.userId;
-console.log('getUserId', userId);
+const userProfilePhoto = userStore.userProfilePhoto;
+const userName = userStore.userName;
+const userGender = userStore.userGender;
+form.value.name = userName;
+form.value.gender = userGender;
+const computedUserProfilePhoto = computed(() => {
+  if(userProfilePhoto && !form.value.photo) return userProfilePhoto
+  return form.value.photo ? form.value.photo : profilePictureDefault
+});
+
 const fileUpload = ref(null);
 const errorText = ref('');
-
 const ApiUpload = async (e: Event) => {
   try {
     const target = e.target as HTMLInputElement;
@@ -86,7 +94,6 @@ const ApiUpload = async (e: Event) => {
     console.error(error);
   }
 };
-
 const ApiUpdateProfile = async () => {
   try {
     const { data } = await updateProfile(form.value);
@@ -95,7 +102,6 @@ const ApiUpdateProfile = async () => {
     console.error(err);
   }
 };
-
 const checkImageResolution = (e: Event): Promise<boolean> => {
   return new Promise((resolve) => {
     const target = e.target as HTMLInputElement;
