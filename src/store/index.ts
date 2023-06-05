@@ -4,7 +4,8 @@ import { profile } from '@/services/api/user';
 interface UserInfo {
   userName: string,
   userId: string,
-  userProfilePhoto: string
+  userProfilePhoto: string,
+  userGender: string
 }
 
 export const useMainStore = defineStore({
@@ -12,7 +13,8 @@ export const useMainStore = defineStore({
   state: (): UserInfo => ({
       userName: '',
       userId: '',
-      userProfilePhoto: ''
+      userProfilePhoto: '',
+      userGender: ''
   }),
   actions: {
     async getProfile() {
@@ -21,7 +23,8 @@ export const useMainStore = defineStore({
         const {
           data: { data },
         } = await profile(UserId);
-        console.log('getProfile', data)
+        this.userProfilePhoto = data.photo
+        this.userGender = data.gender
       } catch (err) {
         console.error(err)
       }

@@ -51,7 +51,6 @@
 </template>
 <script setup lang="ts">
 import profilePictureDefault from '@/assets/images/userDefault.jpg';
-import { ref } from 'vue';
 import { useMainStore } from '@/store/index';
 
 const props = defineProps({
@@ -60,8 +59,5 @@ const props = defineProps({
     default: 'sm:w-[30%]',
   },
 });
-const profile = ref('');
-console.log(profile);
 const mainStore = useMainStore();
-console.log(mainStore);
 </script>

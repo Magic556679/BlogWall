@@ -68,7 +68,7 @@ const login = async () => {
     errorMessage.value = '';
     document.cookie = `id_token= ${data.token}`;
     
-    router.push({ path: 'posts' });
+    router.push({ path: '/' });
   } catch (error) {
     if (error instanceof AxiosError) {
       errorMessage.value = error.response?.data?.message;

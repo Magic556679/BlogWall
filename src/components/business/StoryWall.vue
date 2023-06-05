@@ -79,11 +79,10 @@ interface dataItem {
   likes: number;
 }
 
-const props = defineProps({
+defineProps({
   data: {
     type: Array<dataItem>,
     required: true,
   },
 });
-console.log(props);
 </script>

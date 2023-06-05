@@ -54,7 +54,6 @@ const getAllPosts = async () => {
       data: { data },
     } = await fetchAllPosts();
     postsData.value = data;
-    console.log(postsData)
   } catch (err) {
     console.error(err);
   }
