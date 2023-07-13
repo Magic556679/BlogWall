@@ -10,6 +10,7 @@ export function fetchAllPosts() {
 interface CreatePostData {
   image: string;
   content: string;
+  user: string;
 };
 
 export function createPosts(data: CreatePostData) {

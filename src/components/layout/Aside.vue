@@ -14,7 +14,7 @@
       <div class="flex items-center mt-6">
         <img
           class="w-[45px] h-[45px] mr-4 border-2 border-black rounded-full inline-block"
-          :src="profilePictureDefault"
+          :src="mainStore.userProfilePhoto || profilePictureDefault"
           alt=""
         />
         <p>{{ mainStore.userName }}</p>
