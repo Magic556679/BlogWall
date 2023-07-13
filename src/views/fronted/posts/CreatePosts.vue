@@ -54,7 +54,10 @@ import { uploadImage } from '@/services/api/upload';
 import Aside from '@/components/layout/Aside.vue';
 import Button from '@/components/common/Button.vue';
 import { ref } from 'vue';
+import { useMainStore } from '@/store/index';
 
+const mainStore = useMainStore();
+console.log(mainStore.userId)
 const comment = ref('');
 const imageUrl = ref('')
 const submitData = async (): Promise<void> => {
@@ -62,6 +65,7 @@ const submitData = async (): Promise<void> => {
     const data = {
       image: imageUrl.value,
       content: comment.value,
+      user: mainStore.userId
     };
     await createPosts(data);
   } catch (error) {
@@ -83,4 +87,5 @@ const upload = async (e: Event) => {
     console.error(error);
   }
 };
+
 </script>
