@@ -1,9 +1,9 @@
 <template>
   <div v-if="data.length !== 0">
     <div
-    v-for="item in data"
-    :key="item._id"
-    class="mt-4 p-6 border-2 border-black rounded-lg"
+      v-for="item in data"
+      :key="item._id"
+      class="mt-4 p-6 border-2 border-black rounded-lg"
     >
       <section class="flex">
         <img
@@ -21,8 +21,14 @@
           {{ item.content }}
         </div>
         <img class="mt-4" :src="item.image" alt="" />
-        <i class="fa-regular fa-heart mt-5 mr-2"></i>
-        <span>{{ item.likes || 0}} 個讚</span>
+        <span @click="toggleLike(item._id, item.likes)">
+          <i
+            class="fa-regular fa-heart cursor-pointer mt-5 mr-2"
+            :class="{ 'text-red-500': isLiked(item.likes) }"
+          ></i>
+        </span>
+
+        <span>{{ item.likes.length || 0 }} 個讚</span>
       </section>
       <section class="flex mt-4 items-center">
         <img
@@ -42,7 +48,11 @@
           留言
         </button>
       </section>
-      <section v-for="commentItem in item.comments" :key="commentItem._id"  class="flex px-4 py-[18px]">
+      <section
+        v-for="commentItem in item.comments"
+        :key="commentItem._id"
+        class="flex px-4 py-[18px]"
+      >
         <img
           class="w-[45px] h-[45px] mr-4 border-2 border-black rounded-full inline-block"
           :src="commentItem.user.photo || userDefault"
@@ -69,29 +79,66 @@
 <script setup lang="ts">
 import userDefault from '@/assets/images/userDefault.jpg';
 import { useMainStore } from '@/store/index';
-
+import { ApiAddLike, ApiUnLike } from '@/services/api/post';
 const mainStore = useMainStore();
+
+const isLiked = (items: string[]) => {
+  return items.includes(mainStore.userId);
+};
+
+const emits = defineEmits(['getAllPosts']);
+const toggleLike = (_id: string, items: string[]) => {
+  if (isLiked(items)) {
+    unLike(_id);
+  } else {
+    addLike(_id);
+  }
+};
+
+const addLike = async (_id: string) => {
+  try {
+    const data = {
+      postId: _id,
+    };
+    await ApiAddLike(data);
+    emits('getAllPosts');
+  } catch (err) {
+    console.error(err);
+  }
+};
+
+const unLike = async (_id: string) => {
+  try {
+    const data = {
+      postId: _id,
+    };
+    await ApiUnLike(data);
+    emits('getAllPosts');
+  } catch (err) {
+    console.error(err);
+  }
+};
 
 interface commentItem {
   _id: string;
   user: {
-    name: string,
-    photo: string,
+    name: string;
+    photo: string;
   };
-  comment: string,
-  createdAt: string
+  comment: string;
+  createdAt: string;
 }
 
 interface dataItem {
   _id: string;
   user: {
-    name: string
-    photo: string,
+    name: string;
+    photo: string;
   };
   content: string;
   comments: commentItem[];
   image: string;
-  likes: number;
+  likes: Array<string>;
   createAt: string;
 }
 

@@ -33,7 +33,10 @@
         </div>
       </div>
       <main>
-        <StoryWallContent :data="postsData"></StoryWallContent>
+        <StoryWallContent
+          :data="postsData"
+          @get-all-posts="getAllPosts"
+        ></StoryWallContent>
       </main>
     </div>
     <Aside></Aside>
@@ -41,7 +44,7 @@
 </template>
 <script setup lang="ts">
 import StoryWallContent from '@/components/business/StoryWall.vue';
-import Aside from '@/components/layout/Aside.vue'
+import Aside from '@/components/layout/Aside.vue';
 import { fetchAllPosts } from '@/services/api/post';
 import { ref } from 'vue';
 import { useMainStore } from '@/store/index';
