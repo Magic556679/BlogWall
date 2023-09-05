@@ -1,8 +1,8 @@
 <template>
   <div v-if="data.length !== 0">
     <div
-      v-for="item in data"
-      :key="item._id"
+      v-for="item in computedPostData"
+      :key="item.uuid"
       class="mt-4 p-6 border-2 border-black rounded-lg"
     >
       <section class="flex">
@@ -23,9 +23,11 @@
         <img class="mt-4" :src="item.image" alt="" />
         <span @click="toggleLike(item._id, item.likes)">
           <i
+            v-if="isLiked(item.likes)"
             class="fa-regular fa-heart cursor-pointer mt-5 mr-2"
             :class="{ 'text-red-500': isLiked(item.likes) }"
           ></i>
+          <i v-else class="fa-regular fa-heart cursor-pointer mt-5 mr-2"></i>
         </span>
 
         <span>{{ item.likes.length || 0 }} 個讚</span>
@@ -64,9 +66,7 @@
             <span>{{ commentItem.createdAt }}</span>
           </div>
           <div>
-            <div>
-              <p>{{ commentItem.comment }}</p>
-            </div>
+            <p>{{ commentItem.comment }}</p>
           </div>
         </div>
       </section>
@@ -77,10 +77,19 @@
   </div>
 </template>
 <script setup lang="ts">
+import { nanoid } from 'nanoid';
 import userDefault from '@/assets/images/userDefault.jpg';
 import { useMainStore } from '@/store/index';
 import { ApiAddLike, ApiUnLike } from '@/services/api/post';
+import { computed } from 'vue';
+
 const mainStore = useMainStore();
+
+const computedPostData = computed(() => {
+  return props.data.map((item) => {
+    return { ...item, uuid: nanoid() };
+  });
+});
 
 const isLiked = (items: string[]) => {
   return items.includes(mainStore.userId);
@@ -88,7 +97,8 @@ const isLiked = (items: string[]) => {
 
 const emits = defineEmits(['getAllPosts']);
 const toggleLike = (_id: string, items: string[]) => {
-  if (isLiked(items)) {
+  const liked = isLiked(items);
+  if (liked) {
     unLike(_id);
   } else {
     addLike(_id);
@@ -142,7 +152,7 @@ interface dataItem {
   createAt: string;
 }
 
-defineProps({
+const props = defineProps({
   data: {
     type: Array<dataItem>,
     required: true,
