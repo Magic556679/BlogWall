@@ -3,7 +3,7 @@
     :class="props.width"
     class="hidden sm:block px-5 py-8 h-full border-2 rounded-lg border-black"
   >
-    <div v-if="mainStore.userId">
+    <div v-if="getUserId()">
       <button
         type="button"
         class="w-full py-4 border-2 border-solid border-black rounded-lg text-white bg-[#03438D] shadow-3xl"
@@ -32,6 +32,14 @@
         </div>
         <p>修改個人資料</p>
       </div>
+      <div class="flex items-center mt-6 cursor-pointer" @click="signOut">
+        <div
+          class="w-[45px] h-[45px] mr-4 border-2 border-black rounded-full relative flex justify-center items-center"
+        >
+          <i class="fa-solid fa-arrow-right-from-bracket"></i>
+        </div>
+        <p>登出</p>
+      </div>
     </div>
     <div v-else>
       <button
@@ -52,6 +60,7 @@
 <script setup lang="ts">
 import profilePictureDefault from '@/assets/images/userDefault.jpg';
 import { useMainStore } from '@/store/index';
+import { getUserId } from '@/utils/checkLogin';
 
 const props = defineProps({
   width: {
@@ -60,4 +69,9 @@ const props = defineProps({
   },
 });
 const mainStore = useMainStore();
+
+const signOut = () => {
+  document.cookie = 'id_user=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
+  document.cookie = 'id_token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
+};
 </script>

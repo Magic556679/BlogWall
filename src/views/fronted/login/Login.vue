@@ -66,6 +66,7 @@ const login = async () => {
     storeUser.userName = data.name;
     storeUser.userId = data.id;
     errorMessage.value = '';
+    document.cookie = `id_user= ${data.id}`;
     document.cookie = `id_token= ${data.token}`;
     
     router.push({ path: '/' });
