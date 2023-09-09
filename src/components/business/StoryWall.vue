@@ -1,7 +1,7 @@
 <template>
   <div v-if="data.length !== 0">
     <div
-      v-for="item in computedPostData"
+      v-for="(item, index) in computedPostData"
       :key="item.uuid"
       class="mt-4 p-6 border-2 border-black rounded-lg"
     >
@@ -39,11 +39,13 @@
           alt=""
         />
         <input
+          v-model="commons[index]"
           type="text"
           placeholder="請留言"
           class="grow h-10 px-4 rounded-l-lg border-l-2 border-t-2 border-b-2 border-black"
         />
         <button
+          @click="submitCommons(index, item._id)"
           type="button"
           class="h-10 px-2 rounded-r-lg border-2 border-solid border-black text-white bg-[#03438D]"
         >
@@ -80,10 +82,11 @@
 import { nanoid } from 'nanoid';
 import userDefault from '@/assets/images/userDefault.jpg';
 import { useMainStore } from '@/store/index';
-import { ApiAddLike, ApiUnLike } from '@/services/api/post';
-import { computed } from 'vue';
+import { ApiAddLike, ApiUnLike, createComment } from '@/services/api/post';
+import { reactive, computed } from 'vue';
 
 const mainStore = useMainStore();
+const emits = defineEmits(['getAllPosts']);
 
 const computedPostData = computed(() => {
   return props.data.map((item) => {
@@ -95,7 +98,24 @@ const isLiked = (items: string[]) => {
   return items.includes(mainStore.userId);
 };
 
-const emits = defineEmits(['getAllPosts']);
+let commons = reactive([]);
+
+const submitCommons = async (commonIndex: number, postId: string) => {
+  try {
+    const getCommon = commons[commonIndex];
+    const params = {
+      postId,
+      comment: getCommon,
+      user: mainStore.userId,
+    };
+    await createComment(params);
+    commons = [];
+    emits('getAllPosts');
+  } catch (err) {
+    console.error(err);
+  }
+};
+
 const toggleLike = (_id: string, items: string[]) => {
   const liked = isLiked(items);
   if (liked) {

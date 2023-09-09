@@ -21,6 +21,20 @@ export function createPosts(data: CreatePostData) {
   });
 }
 
+interface createCommentData {
+  postId: string;
+  comment: string;
+  user: string;
+}
+
+export function createComment(data: createCommentData) {
+  return service({
+    url: `posts/${data.postId}/comment`,
+    method: 'post',
+    data,
+  });
+}
+
 interface addLikeData {
   postId: string;
 }
