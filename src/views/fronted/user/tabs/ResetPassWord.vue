@@ -18,28 +18,26 @@
     />
   </section>
   <div class="text-center">
-    <Button class="my-4" size="w-80" @click="submit">重設密碼</Button>
+    <Button class="my-4 sm:w-[80px]" @click="submit">重設密碼</Button>
   </div>
 </template>
 <script setup lang="ts">
 import Button from '@/components/common/Button.vue';
 import { ref } from 'vue';
-import { updatePassword } from '@/services/api/user'
+import { updatePassword } from '@/services/api/user';
 
 interface form {
   password: string;
-  confirmPassword: string
+  confirmPassword: string;
 }
-const formData = ref<form>({ password: '',  confirmPassword:''});
+const formData = ref<form>({ password: '', confirmPassword: '' });
 
 const submit = async () => {
   try {
-    
-    const { data }  =  await updatePassword(formData.value);
-    console.log(data)
+    const { data } = await updatePassword(formData.value);
+    console.log(data);
   } catch (err) {
-    console.error(err)
+    console.error(err);
   }
-}
-
+};
 </script>

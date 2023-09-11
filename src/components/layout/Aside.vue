@@ -19,6 +19,18 @@
         />
         <p>{{ mainStore.userName }}</p>
       </div>
+      <!-- <i class="fa-solid fa-house"></i> -->
+      <div
+        class="flex items-center mt-6 cursor-pointer"
+        @click="$router.push({ path: '/' })"
+      >
+        <div
+          class="w-[45px] h-[45px] mr-4 border-2 border-black rounded-full flex justify-center items-center"
+        >
+          <i class="fa-solid fa-house"></i>
+        </div>
+        <p>首頁</p>
+      </div>
       <div
         class="flex items-center mt-6 cursor-pointer"
         @click="$router.push({ path: 'user' })"
@@ -34,7 +46,7 @@
       </div>
       <div class="flex items-center mt-6 cursor-pointer" @click="signOut">
         <div
-          class="w-[45px] h-[45px] mr-4 border-2 border-black rounded-full relative flex justify-center items-center"
+          class="w-[45px] h-[45px] mr-4 border-2 border-black rounded-full flex justify-center items-center"
         >
           <i class="fa-solid fa-arrow-right-from-bracket"></i>
         </div>

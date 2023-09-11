@@ -7,7 +7,7 @@
     >
       <section class="flex">
         <img
-          class="w-[45px] h-[45px] mr-4 border-2 border-black rounded-full inline-block"
+          class="w-[45px] h-[45px] mr-4 border-2 border-black rounded-full"
           :src="item.user.photo || userDefault"
           alt=""
         />
@@ -34,7 +34,7 @@
       </section>
       <section class="flex mt-4 items-center">
         <img
-          class="w-[45px] h-[45px] mr-4 border-2 border-black rounded-full inline-block"
+          class="w-[45px] h-[45px] mr-4 border-2 border-black rounded-full"
           :src="mainStore.userProfilePhoto || userDefault"
           alt=""
         />
@@ -42,12 +42,12 @@
           v-model="commons[index]"
           type="text"
           placeholder="請留言"
-          class="grow h-10 px-4 rounded-l-lg border-l-2 border-t-2 border-b-2 border-black"
+          class="h-10 px-4 rounded-l-lg border-l-2 border-t-2 border-b-2 border-black sm:flex-grow min-w-0"
         />
         <button
           @click="submitCommons(index, item._id)"
           type="button"
-          class="h-10 px-2 rounded-r-lg border-2 border-solid border-black text-white bg-[#03438D]"
+          class="h-10 px-2 rounded-r-lg border-2 border-solid border-black text-white bg-[#03438D] whitespace-nowrap"
         >
           留言
         </button>
@@ -58,7 +58,7 @@
         class="flex px-4 py-[18px]"
       >
         <img
-          class="w-[45px] h-[45px] mr-4 border-2 border-black rounded-full inline-block"
+          class="w-[45px] h-[45px] mr-4 border-2 border-black rounded-full"
           :src="commentItem.user.photo || userDefault"
           alt=""
         />

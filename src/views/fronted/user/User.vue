@@ -1,16 +1,16 @@
 <template>
-  <div class="flex justify-between mt-12">
+  <div class="flex justify-between sm:mt-12 p-4 sm:p-0">
     <section class="sm:w-[65%]">
       <div class="w-full py-4 rounded-lg border-2 border-solid border-black">
         <h1 class="text-xl font-medium text-center">修改個人資料</h1>
       </div>
       <div class="relative mt-3">
-        <div class="grid grid-cols-5 px-4">
+        <div class="grid grid-cols-4 sm:grid-cols-5 px-4">
           <span
             v-for="item in tabs"
             :key="item.id"
             :class="tableStyle(item.value)"
-            class="text-center border-t border-l border-r border-solid rounded-t-lg cursor-pointer"
+            class="text-center whitespace-nowrap border-t border-l border-r border-solid rounded-t-lg cursor-pointer"
             @click="changeTab(item.value)"
           >
             {{ item.title }}

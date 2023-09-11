@@ -43,7 +43,9 @@
     <p class="text-red-500">{{ errorText }}</p>
   </section>
   <div class="text-center">
-    <Button type="button" class="my-4" size="w-80" @click="ApiUpdateProfile"> 送出更新 </Button>
+    <Button type="button" class="my-4 sm:w-[80px]" @click="ApiUpdateProfile">
+      送出更新
+    </Button>
   </div>
 </template>
 <script setup lang="ts">
@@ -68,8 +70,8 @@ const userGender = userStore.userGender;
 form.value.name = userName;
 form.value.gender = userGender;
 const computedUserProfilePhoto = computed(() => {
-  if(userProfilePhoto && !form.value.photo) return userProfilePhoto
-  return form.value.photo ? form.value.photo : profilePictureDefault
+  if (userProfilePhoto && !form.value.photo) return userProfilePhoto;
+  return form.value.photo ? form.value.photo : profilePictureDefault;
 });
 
 const fileUpload = ref(null);
@@ -97,7 +99,7 @@ const ApiUpload = async (e: Event) => {
 const ApiUpdateProfile = async () => {
   try {
     const { data } = await updateProfile(form.value);
-    console.log('ApiUpdateProfile' ,data);
+    console.log('ApiUpdateProfile', data);
   } catch (err) {
     console.error(err);
   }
@@ -133,5 +135,4 @@ const checkImageResolution = (e: Event): Promise<boolean> => {
     }
   });
 };
-
 </script>

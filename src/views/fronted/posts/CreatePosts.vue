@@ -1,5 +1,5 @@
 <template>
-  <div class="flex justify-between mt-12">
+  <div class="flex justify-between sm:mt-12 p-4 sm:p-0">
     <section class="sm:w-[65%]">
       <div class="w-full py-4 rounded-lg border-2 border-solid border-black">
         <h1
@@ -13,10 +13,10 @@
         <h3 class="text-base">貼文內容</h3>
         <textarea
           v-model="comment"
-          name="w3review"
+          name="userComment"
           rows="4"
           cols="50"
-          class="mt-1 px-4 py-3 rounded-lg border-2 border-solid border-black"
+          class="mt-1 px-4 py-3 w-full rounded-lg border-2 border-solid border-black"
         >
         </textarea>
       </div>
@@ -38,9 +38,9 @@
       </div>
 
       <div
-        class="w-full h-[157px] rounded-lg border-2 border-solid border-black bg-cover bg-center" :style="{ backgroundImage: `url(${imageUrl})` }"
-      >
-      </div>
+        class="w-full h-[157px] rounded-lg border-2 border-solid border-black bg-cover bg-center"
+        :style="{ backgroundImage: `url(${imageUrl})` }"
+      ></div>
       <div class="text-center">
         <Button class="my-4" size="w-80" @click="submitData"> 送出貼文 </Button>
       </div>
@@ -57,15 +57,15 @@ import { ref } from 'vue';
 import { useMainStore } from '@/store/index';
 
 const mainStore = useMainStore();
-console.log(mainStore.userId)
+console.log(mainStore.userId);
 const comment = ref('');
-const imageUrl = ref('')
+const imageUrl = ref('');
 const submitData = async (): Promise<void> => {
   try {
     const data = {
       image: imageUrl.value,
       content: comment.value,
-      user: mainStore.userId
+      user: mainStore.userId,
     };
     await createPosts(data);
   } catch (error) {
@@ -81,11 +81,12 @@ const upload = async (e: Event) => {
     }
     const imageFormData = new FormData();
     imageFormData.append('file', files);
-    const { data: { data } } = await uploadImage(imageFormData);
-    imageUrl.value = data.url
+    const {
+      data: { data },
+    } = await uploadImage(imageFormData);
+    imageUrl.value = data.url;
   } catch (error) {
     console.error(error);
   }
 };
-
 </script>
