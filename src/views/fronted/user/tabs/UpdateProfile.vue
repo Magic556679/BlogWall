@@ -1,6 +1,5 @@
 <template>
   <section class="text-center">
-    <!-- :src="form.photo ? form.photo : profilePictureDefault" -->
     <img
       :src="computedUserProfilePhoto"
       class="w-[107px] h-[107px] border-1 border-black rounded-full mx-auto"
@@ -64,14 +63,22 @@ interface FormData {
 
 const form = ref<FormData>({ name: '', gender: '', photo: '' });
 const userStore = useMainStore();
-const userProfilePhoto = userStore.userProfilePhoto;
-const userName = userStore.userName;
-const userGender = userStore.userGender;
-form.value.name = userName;
-form.value.gender = userGender;
-const computedUserProfilePhoto = computed(() => {
-  if (userProfilePhoto && !form.value.photo) return userProfilePhoto;
-  return form.value.photo ? form.value.photo : profilePictureDefault;
+
+const computedUserProfilePhoto = computed<string>(() => {
+  return form.value.photo || profilePictureDefault;
+});
+
+const init = () => {
+  form.value.name = userStore.userName;
+  form.value.gender = userStore.userGender;
+  form.value.photo = userStore.userProfilePhoto;
+};
+init();
+
+userStore.$subscribe(() => {
+  form.value.name = userStore.userName;
+  form.value.gender = userStore.userGender;
+  form.value.photo = userStore.userProfilePhoto;
 });
 
 const fileUpload = ref(null);
@@ -83,7 +90,7 @@ const ApiUpload = async (e: Event) => {
     if (!files) {
       return;
     }
-    const checkImageSize = await checkImageResolution(e);
+    const checkImageSize: boolean = await checkImageResolution(e);
     if (checkImageSize) return;
 
     const imageFormData = new FormData();
@@ -98,8 +105,7 @@ const ApiUpload = async (e: Event) => {
 };
 const ApiUpdateProfile = async () => {
   try {
-    const { data } = await updateProfile(form.value);
-    console.log('ApiUpdateProfile', data);
+    await updateProfile(form.value);
   } catch (err) {
     console.error(err);
   }

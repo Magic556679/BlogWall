@@ -47,7 +47,6 @@ import StoryWallContent from '@/components/business/StoryWall.vue';
 import Aside from '@/components/layout/Aside.vue';
 import { fetchAllPosts } from '@/services/api/post';
 import { ref } from 'vue';
-import { useMainStore } from '@/store/index';
 
 const postsData = ref([]);
 
@@ -62,6 +61,4 @@ const getAllPosts = async () => {
   }
 };
 getAllPosts();
-const storeUser = useMainStore();
-storeUser.getProfile();
 </script>

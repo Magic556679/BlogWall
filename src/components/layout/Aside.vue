@@ -3,7 +3,7 @@
     :class="props.width"
     class="hidden sm:block px-5 py-8 h-full border-2 rounded-lg border-black"
   >
-    <div v-if="mainStore.userLoggedIn">
+    <div v-if="storeUser.userLoggedIn">
       <button
         type="button"
         class="w-full py-4 border-2 border-solid border-black rounded-lg text-white bg-[#03438D] shadow-3xl"
@@ -14,10 +14,10 @@
       <div class="flex items-center mt-6">
         <img
           class="w-[45px] h-[45px] mr-4 border-2 border-black rounded-full inline-block"
-          :src="mainStore.userProfilePhoto || profilePictureDefault"
+          :src="storeUser.userProfilePhoto || profilePictureDefault"
           alt=""
         />
-        <p>{{ mainStore.userName }}</p>
+        <p>{{ storeUser.userName }}</p>
       </div>
       <div
         class="flex items-center mt-6 cursor-pointer"
@@ -78,9 +78,12 @@ const props = defineProps({
     default: 'sm:w-[30%]',
   },
 });
-const mainStore = useMainStore();
+
+const storeUser = useMainStore();
+storeUser.getProfile();
+
 const signOut = () => {
-  mainStore.userLoggedIn = false;
+  storeUser.userLoggedIn = false;
   document.cookie = 'id_user=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
   document.cookie = 'id_token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
 };
