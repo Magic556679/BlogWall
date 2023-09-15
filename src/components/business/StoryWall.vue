@@ -17,25 +17,22 @@
         </div>
       </section>
       <section class="mt-4">
-        <div>
-          {{ item.content }}
-        </div>
+        <p>{{ item.content }}</p>
         <img class="mt-4" :src="item.image" alt="" />
         <span @click="toggleLike(item._id, item.likes)">
-          <i
-            v-if="isLiked(item.likes)"
-            class="fa-regular fa-heart cursor-pointer mt-5 mr-2"
-            :class="{ 'text-red-500': isLiked(item.likes) }"
-          ></i>
-          <i v-else class="fa-regular fa-heart cursor-pointer mt-5 mr-2"></i>
+          <button type="button">
+            <i
+              class="fa-regular fa-heart cursor-pointer mt-5 mr-2"
+              :class="{ 'text-red-500': isLiked(item.likes) && checkoutLogin }"
+            ></i>
+          </button>
         </span>
-
         <span>{{ item.likes.length || 0 }} 個讚</span>
       </section>
       <section class="flex mt-4 items-center">
         <img
           class="w-[45px] h-[45px] mr-4 border-2 border-black rounded-full"
-          :src="mainStore.userProfilePhoto || userDefault"
+          :src="userStore.userProfilePhoto || userDefault"
           alt=""
         />
         <input
@@ -85,7 +82,7 @@ import { useMainStore } from '@/store/index';
 import { ApiAddLike, ApiUnLike, createComment } from '@/services/api/post';
 import { reactive, computed } from 'vue';
 
-const mainStore = useMainStore();
+const userStore = useMainStore();
 const emits = defineEmits(['getAllPosts']);
 
 const computedPostData = computed(() => {
@@ -94,8 +91,12 @@ const computedPostData = computed(() => {
   });
 });
 
+const checkoutLogin = computed(() => {
+  return userStore.checkLogin;
+});
+
 const isLiked = (items: string[]) => {
-  return items.includes(mainStore.userId);
+  return items.includes(userStore.userId);
 };
 
 let commons = reactive([]);
@@ -106,7 +107,7 @@ const submitCommons = async (commonIndex: number, postId: string) => {
     const params = {
       postId,
       comment: getCommon,
-      user: mainStore.userId,
+      user: userStore.userId,
     };
     await createComment(params);
     commons = [];

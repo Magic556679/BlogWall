@@ -3,7 +3,7 @@
     :class="props.width"
     class="hidden sm:block px-5 py-8 h-full border-2 rounded-lg border-black"
   >
-    <div v-if="getUserId()">
+    <div v-if="mainStore.userLoggedIn">
       <button
         type="button"
         class="w-full py-4 border-2 border-solid border-black rounded-lg text-white bg-[#03438D] shadow-3xl"
@@ -19,7 +19,6 @@
         />
         <p>{{ mainStore.userName }}</p>
       </div>
-      <!-- <i class="fa-solid fa-house"></i> -->
       <div
         class="flex items-center mt-6 cursor-pointer"
         @click="$router.push({ path: '/' })"
@@ -72,7 +71,6 @@
 <script setup lang="ts">
 import profilePictureDefault from '@/assets/images/userDefault.jpg';
 import { useMainStore } from '@/store/index';
-import { getUserId } from '@/utils/checkLogin';
 
 const props = defineProps({
   width: {
@@ -81,8 +79,8 @@ const props = defineProps({
   },
 });
 const mainStore = useMainStore();
-
 const signOut = () => {
+  mainStore.userLoggedIn = false;
   document.cookie = 'id_user=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
   document.cookie = 'id_token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
 };

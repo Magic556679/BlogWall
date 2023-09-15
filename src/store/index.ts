@@ -7,6 +7,7 @@ interface UserInfo {
   userId: string;
   userProfilePhoto: string;
   userGender: string;
+  userLoggedIn: boolean;
 }
 
 export const useMainStore = defineStore({
@@ -16,6 +17,7 @@ export const useMainStore = defineStore({
     userId: '',
     userProfilePhoto: '',
     userGender: '',
+    userLoggedIn: false,
   }),
   actions: {
     async getProfile() {
@@ -29,10 +31,16 @@ export const useMainStore = defineStore({
           this.userId = data._id;
           this.userProfilePhoto = data.photo;
           this.userGender = data.gender;
+          this.userLoggedIn = true;
         }
       } catch (err) {
         console.error(err);
       }
+    },
+  },
+  getters: {
+    checkLogin: (state) => {
+      return state.userLoggedIn;
     },
   },
 });
