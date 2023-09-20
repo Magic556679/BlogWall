@@ -1,5 +1,4 @@
 <template>
-  <!-- @submit="login" -->
   <VeeForm v-slot="{ errors }">
     <Field
       v-model="formData.email"
@@ -11,16 +10,6 @@
       :class="{ 'border-red-500': errors['email'] }"
     />
     <ErrorMessage name="email" class="text-red-500" />
-    <!-- <Field
-      v-model="formData.password"
-      name="password"
-      type="password"
-      placeholder="Password"
-      :rules="rulesPassword"
-      class="w-full h-[50px] mt-4 px-6 py-4 border-2 border-solid border-black"
-      :class="{ 'border-red-500': errors['password'] }"
-    />
-    <ErrorMessage name="password" class="text-red-500" /> -->
     <input
       v-model="formData.password"
       name="password"
@@ -48,14 +37,14 @@
 </template>
 <script setup lang="ts">
 import { ref } from 'vue';
-import { useRouter } from 'vue-router'
+import { useRouter } from 'vue-router';
 import { login as loginApi } from '@/services/api/user';
 import { AxiosError } from 'axios';
-import { useMainStore } from '@/store/index';
+import useStore from '@/store/index';
 
 const formData = ref({ email: '', password: '' });
 const errorMessage = ref('');
-const storeUser = useMainStore();
+const storeUser = useStore().user;
 const router = useRouter();
 
 const login = async () => {
@@ -68,7 +57,7 @@ const login = async () => {
     errorMessage.value = '';
     document.cookie = `id_user= ${data.id}`;
     document.cookie = `id_token= ${data.token}`;
-    
+
     router.push({ path: '/' });
   } catch (error) {
     if (error instanceof AxiosError) {
@@ -77,11 +66,4 @@ const login = async () => {
     console.error(error);
   }
 };
-
-// const rulesPassword = (value: string): string | boolean => {
-//   if (value) {
-//     return true;
-//   }
-//   return '不得為空';
-// };
 </script>
