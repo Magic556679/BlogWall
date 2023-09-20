@@ -4,7 +4,7 @@ import { defineStore } from 'pinia';
 export const useModelStore = defineStore({
   id: 'model',
   state: () => ({
-    isLoginModel: true,
+    isLoginModel: false,
   }),
   actions: {
     openModel() {
