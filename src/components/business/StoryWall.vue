@@ -81,6 +81,7 @@ import userDefault from '@/assets/images/userDefault.jpg';
 import useStore from '@/store/index';
 import { ApiAddLike, ApiUnLike, createComment } from '@/services/api/post';
 import { reactive, computed } from 'vue';
+import { AxiosError } from 'axios';
 
 const userStore = useStore().user;
 const emits = defineEmits(['getAllPosts']);
@@ -134,6 +135,12 @@ const addLike = async (_id: string) => {
     await ApiAddLike(data);
     emits('getAllPosts');
   } catch (err) {
+    if (
+      err instanceof AxiosError &&
+      err.response?.data.error.statusCode === 401
+    ) {
+      useStore().model.openModel();
+    }
     console.error(err);
   }
 };
@@ -146,6 +153,12 @@ const unLike = async (_id: string) => {
     await ApiUnLike(data);
     emits('getAllPosts');
   } catch (err) {
+    if (
+      err instanceof AxiosError &&
+      err.response?.data.error.statusCode === 401
+    ) {
+      useStore().model.openModel();
+    }
     console.error(err);
   }
 };
