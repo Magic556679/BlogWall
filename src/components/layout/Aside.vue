@@ -70,7 +70,9 @@
 </template>
 <script setup lang="ts">
 import profilePictureDefault from '@/assets/images/userDefault.jpg';
-import { useMainStore } from '@/store/index';
+import useStore from '@/store/index';
+import { watchEffect, ref } from 'vue';
+import { useRoute, useRouter } from 'vue-router';
 
 const props = defineProps({
   width: {
@@ -79,8 +81,20 @@ const props = defineProps({
   },
 });
 
-const storeUser = useMainStore();
+const router = useRouter();
+const route = useRoute();
+const storeUser = useStore().user;
 storeUser.getProfile();
+
+const matchPath = ref(['/user', '/posts']);
+
+watchEffect(() => {
+  const currentParams = route.path;
+  const userLoggedIn = storeUser.userLoggedIn;
+  if (matchPath.value.includes(currentParams) && !userLoggedIn) {
+    router.push({ path: '/' });
+  }
+});
 
 const signOut = () => {
   storeUser.userLoggedIn = false;
