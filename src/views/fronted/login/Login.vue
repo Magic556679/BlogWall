@@ -45,6 +45,7 @@ import useStore from '@/store/index';
 const formData = ref({ email: '', password: '' });
 const errorMessage = ref('');
 const storeUser = useStore().user;
+const storeModel = useStore().model;
 const router = useRouter();
 
 const login = async () => {
@@ -57,8 +58,9 @@ const login = async () => {
     errorMessage.value = '';
     document.cookie = `id_user= ${data.id}`;
     document.cookie = `id_token= ${data.token}`;
-
     router.push({ path: '/' });
+    storeUser.getProfile();
+    storeModel.isLoginModel = false;
   } catch (error) {
     if (error instanceof AxiosError) {
       errorMessage.value = error.response?.data?.message;

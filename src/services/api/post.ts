@@ -1,9 +1,13 @@
 import service from '@/services/api/axios';
 
-export function fetchAllPosts() {
+interface SearchContent {
+  search: string;
+}
+export function fetchAllPosts(data: SearchContent) {
   return service({
     url: 'posts',
     method: 'get',
+    params: data,
   });
 }
 
