@@ -9,22 +9,25 @@
         <img
           class="w-[45px] h-[45px] mr-4 border-2 border-black rounded-full"
           :src="item.user.photo || userDefault"
-          alt=""
+          alt="posterLogo"
         />
         <div>
           <p>{{ item.user.name }}</p>
-          <span>{{ item.createAt }}</span>
+          <span>{{ formatData(item.createAt) }}</span>
         </div>
       </section>
       <section class="mt-4">
         <p>{{ item.content }}</p>
-        <img class="mt-4" :src="item.image" alt="" />
+        <img v-if="item.image" class="mt-4" :src="item.image" />
         <span @click="toggleLike(item._id, item.likes)">
-          <button type="button">
+          <button v-if="checkoutLogin" type="button">
             <i
               class="fa-regular fa-heart cursor-pointer mt-5 mr-2"
-              :class="{ 'text-red-500': isLiked(item.likes) && checkoutLogin }"
+              :class="{ 'text-red-500': isLiked(item.likes) }"
             ></i>
+          </button>
+          <button v-else type="button">
+            <i class="fa-regular fa-heart cursor-pointer mt-5 mr-2"></i>
           </button>
         </span>
         <span>{{ item.likes.length || 0 }} 個讚</span>
@@ -32,8 +35,8 @@
       <section class="flex mt-4 items-center">
         <img
           class="w-[45px] h-[45px] mr-4 border-2 border-black rounded-full"
-          :src="userStore.userProfilePhoto || userDefault"
-          alt=""
+          :src="checkoutLogin ? userStore.userProfilePhoto : userDefault"
+          alt="loggedInUserLogo"
         />
         <input
           v-model="commons[index]"
@@ -46,7 +49,7 @@
           type="button"
           class="h-10 px-2 rounded-r-lg border-2 border-solid border-black text-white bg-[#03438D] whitespace-nowrap"
         >
-          留言
+          <span>留言</span>
         </button>
       </section>
       <section
@@ -57,12 +60,12 @@
         <img
           class="w-[45px] h-[45px] mr-4 border-2 border-black rounded-full"
           :src="commentItem.user.photo || userDefault"
-          alt=""
+          alt="commenterLogo"
         />
         <div>
           <div>
             <p>{{ commentItem.user.name }}</p>
-            <span>{{ commentItem.createdAt }}</span>
+            <span>{{ formatData(commentItem.createdAt) }}</span>
           </div>
           <div>
             <p>{{ commentItem.comment }}</p>
@@ -81,7 +84,7 @@ import userDefault from '@/assets/images/userDefault.jpg';
 import useStore from '@/store/index';
 import { ApiAddLike, ApiUnLike, createComment } from '@/services/api/post';
 import { reactive, computed } from 'vue';
-import { AxiosError } from 'axios';
+import unLoginError from '@/hooks/unLoginError';
 
 const userStore = useStore().user;
 const emits = defineEmits(['getAllPosts']);
@@ -91,6 +94,10 @@ const computedPostData = computed(() => {
     return { ...item, uuid: nanoid() };
   });
 });
+
+const formatData = (date: string) => {
+  return date.split('T')[0];
+};
 
 const checkoutLogin = computed(() => {
   return userStore.checkLogin;
@@ -114,7 +121,7 @@ const submitCommons = async (commonIndex: number, postId: string) => {
     commons = [];
     emits('getAllPosts');
   } catch (err) {
-    console.error(err);
+    unLoginError(err as Error);
   }
 };
 
@@ -135,13 +142,7 @@ const addLike = async (_id: string) => {
     await ApiAddLike(data);
     emits('getAllPosts');
   } catch (err) {
-    if (
-      err instanceof AxiosError &&
-      err.response?.data.error.statusCode === 401
-    ) {
-      useStore().model.openModel();
-    }
-    console.error(err);
+    unLoginError(err as Error);
   }
 };
 
@@ -153,13 +154,7 @@ const unLike = async (_id: string) => {
     await ApiUnLike(data);
     emits('getAllPosts');
   } catch (err) {
-    if (
-      err instanceof AxiosError &&
-      err.response?.data.error.statusCode === 401
-    ) {
-      useStore().model.openModel();
-    }
-    console.error(err);
+    unLoginError(err as Error);
   }
 };
 
