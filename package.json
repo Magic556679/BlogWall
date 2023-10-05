@@ -5,8 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vue-tsc && vite build",
-    "build-only": "vite build",
+    "build": "vue-tsc --noEmit && vite build",
     "preview": "vite preview --port 8080"
   },
   "dependencies": {
