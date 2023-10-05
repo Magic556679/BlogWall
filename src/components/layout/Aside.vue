@@ -61,7 +61,7 @@
       </button>
       <button
         class="w-full mt-2 py-4 border-2 border-solid border-black rounded-lg text-white bg-[#03438D] shadow-3xl"
-        @click="$router.push({ path: 'register' })"
+        @click="$router.push({ path: 'login/register' })"
       >
         註冊
       </button>
