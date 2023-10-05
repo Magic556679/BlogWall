@@ -5,7 +5,7 @@ import eslintPlugin from 'vite-plugin-eslint';
 
 export default defineConfig({
   base: '/BlogWall/',
-  build: { outDir: 'docs' },
+  // build: { outDir: 'docs' },
   plugins: [vue(), eslintPlugin({ cache: false })],
   resolve: {
     alias: {
