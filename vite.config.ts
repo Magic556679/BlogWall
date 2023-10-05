@@ -4,7 +4,8 @@ import path from 'path';
 import eslintPlugin from 'vite-plugin-eslint';
 
 export default defineConfig({
-  base: './',
+  base: '/BlogWall/',
+  build: { outDir: 'dist' },
   plugins: [vue(), eslintPlugin({ cache: false })],
   resolve: {
     alias: {
