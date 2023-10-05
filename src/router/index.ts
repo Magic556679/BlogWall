@@ -1,4 +1,4 @@
-import { createRouter, createWebHistory } from 'vue-router';
+import { createRouter, createWebHashHistory } from 'vue-router';
 
 const routes = [
   {
@@ -43,7 +43,8 @@ const routes = [
 ];
 
 const router = createRouter({
-  history: createWebHistory('/BlogWall/'),
+  // history: createWebHistory('/BlogWall/'),
+  history: createWebHashHistory(),
   routes,
 });
 
