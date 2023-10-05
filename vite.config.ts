@@ -4,16 +4,13 @@ import path from 'path';
 import eslintPlugin from 'vite-plugin-eslint';
 
 export default defineConfig({
+  base: '/BlogWall/',
   plugins: [vue(), eslintPlugin({ cache: false })],
   resolve: {
     alias: {
       '@': path.resolve(__dirname, './src'),
     },
   },
-  build: {
-    outDir: '../dist',
-  },
-  base: '/BlogWall/',
   server: {
     host: '0.0.0.0',
     port: 8080,
