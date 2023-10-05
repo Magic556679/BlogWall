@@ -46,19 +46,24 @@
 import StoryWallContent from '@/components/business/StoryWall.vue';
 import Aside from '@/components/layout/Aside.vue';
 import { fetchAllPosts } from '@/services/api/post';
+import useStore from '@/store/index';
 import { ref } from 'vue';
 
 const postsData = ref([]);
 const searchContent = ref('');
+const userStore = useStore().load;
 
 const getAllPosts = async () => {
   try {
+    userStore.toggleLoad();
     const {
       data: { data },
     } = await fetchAllPosts({ search: searchContent.value });
     postsData.value = data;
+    userStore.toggleLoad();
   } catch (err) {
     console.error(err);
+    userStore.toggleLoad();
   }
 };
 getAllPosts();

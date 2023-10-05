@@ -35,7 +35,11 @@
       <section class="flex mt-4 items-center">
         <img
           class="w-[45px] h-[45px] mr-4 border-2 border-black rounded-full"
-          :src="checkoutLogin ? userStore.userProfilePhoto : userDefault"
+          :src="
+            userStore.userProfilePhoto
+              ? userStore.userProfilePhoto
+              : userDefault
+          "
           alt="loggedInUserLogo"
         />
         <input
