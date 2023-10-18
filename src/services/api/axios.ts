@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const service = axios.create({
-  // withCredentials: true,
+  withCredentials: true,
   baseURL: import.meta.env.VITE_SERVER_BASE_API,
   headers: {
     accept: 'application/json',
