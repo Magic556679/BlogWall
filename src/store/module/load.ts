@@ -10,9 +10,6 @@ export const useModelStore = defineStore({
     toggleLoad() {
       this.isLoading = !this.isLoading;
     },
-    // closeModel() {
-    //   this.isLoading = false;
-    // },
   },
 });
 

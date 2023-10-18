@@ -18,7 +18,11 @@
       </section>
       <section class="mt-4">
         <p>{{ item.content }}</p>
-        <img v-if="item.image" class="mt-4" :src="item.image" />
+        <div
+          v-if="item.image"
+          class="mt-4 w-full h-52 bg-cover bg-center"
+          :style="{ backgroundImage: `url(${item.image})` }"
+        ></div>
         <span @click="toggleLike(item._id, item.likes)">
           <button v-if="checkoutLogin" type="button">
             <i
