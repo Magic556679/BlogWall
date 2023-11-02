@@ -1,1 +1,0 @@
-import{d as e,o,c as s,h as a,g as t}from"./index-a018d2c7.js";const c="/BlogWall/assets/404-0da806f3.jpg",r=["src"],u=e({__name:"NotFound",setup(n){return(l,_)=>(o(),s("div",null,[a("img",{src:t(c),class:"object-cover w-2/4 mx-auto h-screen",alt:"404"},null,8,r)]))}});export{u as default};
