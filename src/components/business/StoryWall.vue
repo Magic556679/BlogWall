@@ -76,7 +76,7 @@
             <span>{{ formatData(commentItem.createdAt) }}</span>
           </div>
           <div>
-            <p>{{ commentItem.comment }}</p>
+            <p class="break-words">{{ commentItem.comment }}</p>
           </div>
         </div>
       </section>
