@@ -46,6 +46,7 @@ jobs:
         with:
           # Upload dist repository
           path: './docs'
+          ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v1
