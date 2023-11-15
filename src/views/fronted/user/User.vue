@@ -2,9 +2,7 @@
   <div class="sm:flex justify-between sm:mt-12 p-4 sm:p-0">
     <section class="sm:w-[65%]">
       <div class="w-full py-4 rounded-lg border-2 border-solid border-black">
-        <h1 class="text-xl font-medium text-center bg-green-500">
-          修改個人資料
-        </h1>
+        <h1 class="text-xl font-medium text-center">修改個人資料</h1>
       </div>
       <div class="relative mt-3">
         <div class="grid grid-cols-4 sm:grid-cols-5 px-4">
