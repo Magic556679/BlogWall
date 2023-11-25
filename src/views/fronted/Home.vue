@@ -1,5 +1,5 @@
 <template>
-  <div class="flex justify-between sm:mt-12 p-4 sm:p-0">
+  <div class="sm:flex justify-between sm:mt-12 p-4 sm:p-0">
     <div class="sm:w-[65%]">
       <div class="flex justify-between">
         <!-- <select
