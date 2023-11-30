@@ -89,12 +89,12 @@
 <script setup lang="ts">
 import { nanoid } from 'nanoid';
 import userDefault from '@/assets/images/userDefault.jpg';
-import useStore from '@/store/index';
+import { useUserStore } from '@/stores';
 import { ApiAddLike, ApiUnLike, createComment } from '@/services/api/post';
 import { reactive, computed } from 'vue';
 import unLoginError from '@/hooks/unLoginError';
 
-const userStore = useStore().user;
+const userStore = useUserStore();
 const emits = defineEmits(['getAllPosts']);
 
 const computedPostData = computed(() => {

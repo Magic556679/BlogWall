@@ -10,8 +10,7 @@ interface UserInfo {
   userLoggedIn: boolean;
 }
 
-export const useUserStore = defineStore({
-  id: 'user',
+export const useUserStore = defineStore('user', {
   state: (): UserInfo => ({
     userName: '',
     userId: '',
@@ -45,4 +44,4 @@ export const useUserStore = defineStore({
   },
 });
 
-export default useUserStore;
+// export default useUserStore;

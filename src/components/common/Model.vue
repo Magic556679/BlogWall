@@ -11,9 +11,9 @@
 </template>
 <script setup lang="ts">
 import Login from '@/views/fronted/login/Login.vue';
-import useStore from '@/store/index';
+import { useModelStore } from '@/stores';
 
-const storeModel = useStore().model;
+const storeModel = useModelStore();
 const closeModel = () => {
   storeModel.closeModel();
 };

@@ -54,9 +54,10 @@ import { uploadImage } from '@/services/api/upload';
 import Aside from '@/components/layout/Aside.vue';
 import Button from '@/components/common/Button.vue';
 import { ref } from 'vue';
-import useStore from '@/store/index';
+// import useStore from '@/store/index';
+import { useUserStore } from '@/stores';
 
-const mainStore = useStore().user;
+const mainStore = useUserStore();
 console.log(mainStore.userId);
 const comment = ref('');
 const imageUrl = ref('');

@@ -7,7 +7,7 @@
   </div>
 </template>
 <script setup lang="ts">
-import useStore from '@/store/index';
+import { useLoadStore } from '@/stores';
 
-const storeModel = useStore().load;
+const storeModel = useLoadStore();
 </script>

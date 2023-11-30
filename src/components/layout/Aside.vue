@@ -70,7 +70,7 @@
 </template>
 <script setup lang="ts">
 import profilePictureDefault from '@/assets/images/userDefault.jpg';
-import useStore from '@/store/index';
+import { useUserStore } from '@/stores';
 import { watchEffect, ref } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 
@@ -83,7 +83,7 @@ const props = defineProps({
 
 const router = useRouter();
 const route = useRoute();
-const storeUser = useStore().user;
+const storeUser = useUserStore();
 storeUser.getProfile();
 
 const matchPath = ref(['/user', '/posts']);

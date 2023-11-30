@@ -1,10 +1,11 @@
 import { AxiosError } from 'axios';
-import useStore from '@/store/index';
+import { useModelStore } from '@/stores';
 
 const unLoginError = (err: Error) => {
   console.log(err);
   if (err instanceof AxiosError && err.response?.status === 401) {
-    useStore().model.openModel();
+    const useModel = useModelStore();
+    useModel.openModel();
   }
   console.error(err);
 };

@@ -51,7 +51,7 @@
 import Button from '@/components/common/Button.vue';
 import profilePictureDefault from '@/assets/images/userDefault.jpg';
 import { ref, computed } from 'vue';
-import useStore from '@/store/index';
+import { useUserStore } from '@/stores';
 import { uploadImage } from '@/services/api/upload';
 import { updateProfile } from '@/services/api/user';
 
@@ -62,7 +62,7 @@ interface FormData {
 }
 
 const form = ref<FormData>({ name: '', gender: '', photo: '' });
-const userStore = useStore().user;
+const userStore = useUserStore();
 
 const computedUserProfilePhoto = computed<string>(() => {
   return form.value.photo || profilePictureDefault;

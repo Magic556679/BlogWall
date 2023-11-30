@@ -1,8 +1,6 @@
-// popupStore.js
 import { defineStore } from 'pinia';
 
-export const useModelStore = defineStore({
-  id: 'load',
+export const useLoadStore = defineStore('load', {
   state: () => ({
     isLoading: false,
   }),
@@ -12,5 +10,3 @@ export const useModelStore = defineStore({
     },
   },
 });
-
-export default useModelStore;

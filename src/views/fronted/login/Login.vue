@@ -40,12 +40,12 @@ import { ref } from 'vue';
 import { useRouter } from 'vue-router';
 import { login as loginApi } from '@/services/api/user';
 import { AxiosError } from 'axios';
-import useStore from '@/store/index';
+import { useUserStore, useModelStore } from '@/stores';
 
 const formData = ref({ email: '', password: '' });
 const errorMessage = ref('');
-const storeUser = useStore().user;
-const storeModel = useStore().model;
+const storeUser = useUserStore();
+const storeModel = useModelStore();
 const router = useRouter();
 
 const login = async () => {
